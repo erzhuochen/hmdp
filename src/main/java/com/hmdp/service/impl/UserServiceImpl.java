@@ -85,7 +85,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             user = createUserWithPhone(phone);
         }
         //7.保存用户信息到redis中
-
         //7.1 随机生成token，作为登录令牌
         String token = UUID.randomUUID().toString(true);
         //7.2 将User对象转为Hash存储
@@ -98,7 +97,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 //        session.setAttribute("user", userDTO);
         stringRedisTemplate.opsForHash().putAll(RedisConstants.LOGIN_USER_KEY + token, userMap);
         //7.4 设置token有效期
-        stringRedisTemplate.expire(RedisConstants.LOGIN_USER_KEY + token, 30, TimeUnit.MINUTES);
+        stringRedisTemplate.expire(RedisConstants.LOGIN_USER_KEY + token, 30, TimeUnit.DAYS);
         //8.返回token
 
         return Result.ok(token);
