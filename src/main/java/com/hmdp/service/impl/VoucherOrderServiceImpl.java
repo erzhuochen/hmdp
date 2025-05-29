@@ -53,6 +53,7 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
         boolean success = seckillVoucherService.lambdaUpdate()
                 .setSql("stock = stock-1")
                 .eq(SeckillVoucher::getVoucherId, voucherId)
+                .gt(SeckillVoucher::getStock, 0)
                 .update();
         if(!success){
             return Result.fail("库存不足");
