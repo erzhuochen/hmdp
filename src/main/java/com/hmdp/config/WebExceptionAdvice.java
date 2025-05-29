@@ -2,11 +2,13 @@ package com.hmdp.config;
 
 import com.hmdp.dto.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
 @RestControllerAdvice
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class WebExceptionAdvice {
 
     @ExceptionHandler(RuntimeException.class)
